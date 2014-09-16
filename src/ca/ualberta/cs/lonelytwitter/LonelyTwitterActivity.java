@@ -34,16 +34,8 @@ public class LonelyTwitterActivity extends Activity {
 		Button saveButton = (Button) findViewById(R.id.save);
 		oldTweetsList = (ListView) findViewById(R.id.oldTweetsList);
 
-		saveButton.setOnClickListener(new View.OnClickListener() {
-
-			public void onClick(View v) {
-				setResult(RESULT_OK);
-				String text = bodyText.getText().toString();
-				saveInFile(text, new Date(System.currentTimeMillis()));
-				finish();
-
-			}
-		});
+		//saveButton.setOnClickListener(new View.OnClickListener() {
+		//});
 	}
 
 	@Override
@@ -54,6 +46,14 @@ public class LonelyTwitterActivity extends Activity {
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 				R.layout.list_item, tweets);
 		oldTweetsList.setAdapter(adapter);
+		
+		// instantiates new class
+		// since no constructor is defined the superclass Object has
+		// a constructor
+
+		
+			
+		
 	}
 
 	private String[] loadFromFile() {
@@ -66,7 +66,25 @@ public class LonelyTwitterActivity extends Activity {
 				tweets.add(line);
 				line = in.readLine();
 			}
-
+			
+			// instantiates new class
+			// since no constructor is defined the superclass Object has
+			// a constructor
+			//Test t1 = new Test("Hello\n");
+			// use setter
+			//t.setText("abc");
+			// use getter
+			//tweets.add(t1.getText());
+			
+			// make an instance of the child class
+			// polymorphism example
+			//Test t2 = new Test2("Hi");
+			//tweets.add(t2.getText());
+			
+			// InterfaceImp1 ii = new InterfaceImp1();
+			// tweets.add(ii.getText());
+			
+			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -81,7 +99,7 @@ public class LonelyTwitterActivity extends Activity {
 		try {
 			FileOutputStream fos = openFileOutput(FILENAME,
 					Context.MODE_APPEND);
-			fos.write(new String(date.toString() + " | " + text)
+			fos.write(new String(date.toString() + " | " + text + '\n')
 					.getBytes());
 			fos.close();
 		} catch (FileNotFoundException e) {
@@ -91,5 +109,15 @@ public class LonelyTwitterActivity extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void onClick(View v) {
+		setResult(RESULT_OK);
+		String text = bodyText.getText().toString();
+		// add the location to each tweet.
+		Subclass1 location = new Subclass1();
+		saveInFile(text + "Location: " + location.getLocation(), new Date(System.currentTimeMillis()));
+		finish();
+
 	}
 }
