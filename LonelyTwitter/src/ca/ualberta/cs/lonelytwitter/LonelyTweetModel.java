@@ -2,7 +2,7 @@ package ca.ualberta.cs.lonelytwitter;
 
 import java.util.Date;
 
-public class LonelyTweetModel {
+public class LonelyTweetModel implements Comparable<LonelyTweetModel> {
 	private String text;
 	private Date timestamp;
 	public String getText() {
@@ -44,4 +44,10 @@ public class LonelyTweetModel {
 		LonelyTweetModel otherTweet = (LonelyTweetModel) other;
 		return text.equals(otherTweet.text);
 	}
+	
+	// http://stackoverflow.com/questions/1814095/sorting-an-arraylist-of-contacts-based-on-name
+	public int compareTo(LonelyTweetModel other){
+		return timestamp.compareTo(other.timestamp);
+	}
+
 }
