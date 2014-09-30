@@ -46,6 +46,15 @@ public class TweetListModelTest extends ActivityInstrumentationTestCase2<LonelyT
 		assertTrue(tlm.getCount() == 0);
 	}
 	
+	public void testRemoveTweet(){
+		LonelyTweetModel t = new LonelyTweetModel("Hello");
+		TweetListModel tlm = new TweetListModel();
+		tlm.addTweet(t);
+		assertTrue(tlm.getCount() == 1);
+		tlm.removeTweet(t);
+		assertTrue(tlm.getCount() == 0);
+	}
+	
 	public void testHasTweet(){
 		LonelyTweetModel t1 = new LonelyTweetModel("Hello");
 		LonelyTweetModel t2 = new LonelyTweetModel("Hi");
@@ -60,9 +69,9 @@ public class TweetListModelTest extends ActivityInstrumentationTestCase2<LonelyT
 		LonelyTweetModel t2 = new LonelyTweetModel("Hi");
 		LonelyTweetModel t3 = new LonelyTweetModel("Hey");
 		TweetListModel tlm = new TweetListModel();
+		tlm.addTweet(t2);
 		tlm.addTweet(t3);
 		tlm.addTweet(t1);
-		tlm.addTweet(t2);
 		// get tweets should return a list in chron order t1, t2, t3
 		List<LonelyTweetModel> tweetList = tlm.getTweets();
 		assertTrue(tweetList.get(0).getTimestamp().before(tweetList.get(1).getTimestamp()));
